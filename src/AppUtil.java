@@ -3,8 +3,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DateUtil {
+public class AppUtil {
 	
+	// add days to Date
     public static Date addDays(Date date, int days)
     {
         Calendar cal = Calendar.getInstance();
@@ -13,10 +14,12 @@ public class DateUtil {
         return cal.getTime();
     }
     
+    // convert specific format date to string
     public static String convertDateToString(Date date, String formatDate) {
     	return new SimpleDateFormat(formatDate).format(date.getTime());
     }
     
+    // convert String to specific date format
     public static Date convertStringToDate(String strDate, String formatDate) {
 
     	Date parsedDate = null;
@@ -24,9 +27,15 @@ public class DateUtil {
 			 parsedDate=new SimpleDateFormat(formatDate).parse(strDate);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+		e.printStackTrace();
 		}
     	return parsedDate;
     }
     
+    // Create event 
+    public static Event createEvent(int index, String entity, String descr) {
+    	String eventID = "E" + index;
+    	Event event = new Event(eventID, entity, descr);
+    	return event;
+    }
 }

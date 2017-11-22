@@ -128,7 +128,7 @@ public class Patron
 				info += hold.getDescr();
 				info += System.lineSeparator();
 				info += "------ placed on: ";
-				info += DateUtil.convertDateToString(hold.getPlacedOn(), "MM/dd/yyyy");
+				info += AppUtil.convertDateToString(hold.getPlacedOn(), "MM/dd/yyyy");
 				info += System.lineSeparator();
 			}
 			
