@@ -29,7 +29,7 @@ public class TRLApp {
 			System.out.println("|        [2] Check in           |");
 			System.out.println("|        [3] Exit               |");
 			System.out.println("=================================");
-			System.out.print("> Enter your option here: ");
+			System.out.print("> Enter your option here [choose 1,2, or 3] : ");
 			
 			try {
 
