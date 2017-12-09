@@ -29,7 +29,7 @@ public class TRLApp {
 			System.out.println("|        [2] Check in           |");
 			System.out.println("|        [3] Exit               |");
 			System.out.println("=================================");
-			System.out.print("> Enter your option here [choose 1,2, or 3] : ");
+			System.out.print("> Enter your option here [choose 1, 2, or 3] : ");
 			
 			try {
 
@@ -66,10 +66,10 @@ public class TRLApp {
 			System.out.println("|   Checkout Menu               |");
 			System.out.println("=================================");
 			System.out.println("| Options:                      |");
-			System.out.println("|        [1] Enter patron ID    |");
+			System.out.println("|        [1] Enter Patron ID    |");
 			System.out.println("|        [2] Back to main menu  |");
 			System.out.println("=================================");
-			System.out.print("> Enter your option here: ");
+			System.out.print("> Enter your option here [choose 1 or 2]: ");
 			
 			try {
 				choice = choiceInput.nextInt();//User inputs a choice (integer).
@@ -125,7 +125,7 @@ public class TRLApp {
 			System.out.println("|        [1] Enter copy ID      |");
 			System.out.println("|        [2] Back to main menu  |");
 			System.out.println("=================================");
-			System.out.print("> Enter your option here: ");
+			System.out.print("> Enter your option here[choose 1 or 2]: ");
 			
 			try {
 				choice = choiceInput.nextInt();//User inputs a choice (integer).
