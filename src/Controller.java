@@ -2,63 +2,85 @@ import java.util.Map;
 
 public class Controller {
 
-	private Patron p = null;
-	private Copy c = null;
-	private int idxEventDB = 0;
-	private String entityPatron = "patron";
-	private String entityCopy = "copy";
-	private String descr = "";
-	Event event = null;
+	private static Patron p = null;
+	private static Copy c = null;
+	private static int idxEventDB = 0;
+	private static String entityPatron = "patron";
+	private static String entityCopy = "copy";
+	private static String descr = "";
+	private static Event event = null;
 	
-	public Controller() {}
+	// get instance of Patron
+	public static Patron getPatron() {
+		return p;
+	}
 	
-	public String getPatron(String patronID) {
-		
+	// get instance of Copy
+	public static Copy getCopy() {
+		return c;
+	}
+
+	static {}
+
+	public static String verifyPatron(String patronID) {	
 		// get patron from fake DB
-		p = FakeDB.getPatron(patronID);
-		// create event
-		descr = "get patron " + patronID;
-		event = AppUtil.createEvent(++idxEventDB, entityPatron, descr);
-		// add event to fake DB
-		FakeDB.registerNewEvent(event);
-		return p.toString();
+		p = FakeDB.getPatron(patronID);		
+		String msg = p == null ? "> Patron ID [" + patronID + "] not found" : p.toString();
+		// create log event 
+		logger(entityPatron,"get patron " + patronID);
+		return msg;
 	}
 	
-	public String getCopy(String copyID) {
+	public static String startCheckOut(String copyID) {
+		// get copy from fake DB
+		c = FakeDB.getCopy(copyID);
+		String msg = c == null ? "> Copy ID [" + copyID + "] not found" : checkOutCopy(copyID);
+		// create log event 
+		logger(entityCopy,"get copy " + copyID);
+		return msg;
+	}
+
+	private static void logger(String entity, String descr) {
+		event =  new Event( "E" + ++idxEventDB, entity, descr);
+		FakeDB.logEvent(event);
+	}
+
+	public static String startCheckIn(String copyID) {
 		
 		// get copy from fake DB
 		c = FakeDB.getCopy(copyID);
-		// create event
-		descr = "get copy " + copyID;
-		event = AppUtil.createEvent(++idxEventDB, entityCopy, descr);
-		// add event to fake DB
-		FakeDB.registerNewEvent(event);
-		return c.toString();
+		if(c == null) {
+			logger(entityCopy,"Copy ID [" + copyID + "] not found");
+			return "> Copy ID [" + copyID + "] not found";
+		}
+		
+		if(p == null) 
+			return "> Check-in process not valid for Copy ID [" + copyID + "]";
+		
+		boolean checkedInCopy = p.checkCopyIn(c);
+		String msg = checkedInCopy ? "> Checked Copy ID [" + copyID + "]" : "> Check in Copy ID [" + copyID + "] failed"; 
+		logger(entityCopy,msg);
+		return msg + System.lineSeparator() + p.toString();
 	}
 	
-	public String checkOutCopy(String copyID) {
-		String message = "";
+	public static String checkOutCopy(String copyID) {
+		String msg = "";
 		// get copy from fake DB
 		c = FakeDB.getCopy(copyID);
-		// create event
-		event = AppUtil.createEvent(++idxEventDB, entityCopy, "get copy " + copyID);
+		logger(entityCopy,"get copy " + copyID);
 		// copy out to patron
 		c.setOutTo(p);
-		// create event
-		descr = "set copy ID: " + copyID + " out to patron ID: " + p.getPatronID();
-		event = AppUtil.createEvent(++idxEventDB, entityCopy, descr);
-		
+		logger(entityCopy,"set copy ID: " + copyID + " out to patron ID: " + p.getPatronID());
 		boolean checkedOutCopy = p.checkCopyOut(c);
 		
 		if(checkedOutCopy) {
-			// create event
-			descr = "added copy ID: " + copyID + " to patron ID: " + p.getPatronID();
-			event = AppUtil.createEvent(++idxEventDB, entityPatron, descr);
-			message = p.toString();
+			logger(entityPatron, "added copy ID: " + copyID + " to patron ID: " + p.getPatronID());
+			msg = p.toString();
 		} else {
-			message = "Insertion copy " + c.getCopyID() + " failed";
+			msg = "Checked copy ID [" + copyID + "] out failed";
+			logger(entityPatron,msg);
 		}
-		return message;
+		return msg;
 	}
 
 	public String getAllEvent() {

@@ -98,36 +98,40 @@ public class Patron
 	// returns a string representation of the object Patron
 	public String toString()
 	{
-		String info = "";
-		//info += System.lineSeparator();
-		info += "Patron ID : " + this.patronID;
+		String info = "================================";
 		info += System.lineSeparator();
-		info += "Patron name : " + this.name;
+		info += "|   patron info                |";
+		info += System.lineSeparator();
+		info += "================================";
+		info += System.lineSeparator();
+		info += "> Patron ID : " + this.patronID;
+		info += System.lineSeparator();
+		info += "> Patron name : " + this.name;
 		if(!copiesOut.isEmpty()) {
 			info += System.lineSeparator();
-			info += "#copy : " + copiesOut.size();
+			info += "> #copy : " + copiesOut.size();
 			info += System.lineSeparator();
-			info += "Copies out: [";
+			info += "> Copies out: [";
 			for (Copy copy : copiesOut) 
 				info += copy.getCopyID() + ", ";
 			
-			info = trimEndChar(info.trim());
+			info = AppUtil.trimEndChar(info.trim());
 			info += "]";
 		}
 		
 		if(!holds.isEmpty()) {
 			info += System.lineSeparator();
-			info += "#hold : " + holds.size();
+			info += ">> #hold : " + holds.size();
 			info += System.lineSeparator();
 			
 			for (Hold hold : holds) {
-				info += "---- Hold ID: ";
+				info += ">>> Hold ID: ";
 				info += hold.getHoldID();
 				info += System.lineSeparator();
-				info += "------ description: ";
+				info += ">>> description: ";
 				info += hold.getDescr();
 				info += System.lineSeparator();
-				info += "------ placed on: ";
+				info += ">>> placed on: ";
 				info += AppUtil.convertDateToString(hold.getPlacedOn(), "MM/dd/yyyy");
 				info += System.lineSeparator();
 			}
@@ -137,9 +141,5 @@ public class Patron
 		return info;
 	}
 	
-	// Return the passed string without the removed last character
-	public String trimEndChar(String str) {
-		return (str.length() == 0 || str == null ? "" : str.substring(0, str.length() - 1));
-	}
 
 }

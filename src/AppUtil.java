@@ -38,4 +38,10 @@ public class AppUtil {
     	Event event = new Event(eventID, entity, descr);
     	return event;
     }
+    
+	// Return the passed string without the removed last character
+	public static String trimEndChar(String str) {
+		return (str.length() == 0 || str == null ? "" : str.substring(0, str.length() - 1));
+	}
+
 }

@@ -91,11 +91,6 @@ public class Copy
 	// put test code in your main(), but realize it's not unit testing!
 	public static void main(String[] args)
 	{
-		// create new copy c1
-		Copy c1 = new Copy("C1", "Fun with Objects");
-		// info c1
-		System.out.println(c1.toString());
-		// assertion
-		//System.out.println("Is C1 in fake db ? " + c1.equals(c2) + ", expected true");
+	
 	}
 }
