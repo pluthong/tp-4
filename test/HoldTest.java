@@ -12,9 +12,10 @@ public class HoldTest {
 	@Before
 	public void create_sample_hold() {
 		// create new hold 
-		hold = new Hold("H1","P1", "you have tuition fee to pay.", AppUtil.convertStringToDate("11/09/2017", "MM/dd/yyyy"));
+		Patron p1 = new Patron("P1", "ERIC");
+		hold = new Hold("H1",p1, "you have tuition fee to pay.", AppUtil.convertStringToDate("11/09/2017", "MM/dd/yyyy"));
 	}
-	
+
 	// test method getHoldID
 	@Test
 	public void test_get_holdID() {

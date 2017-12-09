@@ -2,7 +2,7 @@ import java.util.Date;
 
 public class Hold {
 	private String holdID;
-	private String patronID;
+	private Patron patron ;
 	private String descr;
 	private Date placedOn;
 	
@@ -17,13 +17,13 @@ public class Hold {
 	}
 	
 	// get patron
-	public String getPatronID() {
-		return this.patronID;
+	public Patron getPatron() {
+		return this.patron;
 	}
 	
 	// set patron
-	public void setPatron(String patronID) {
-		this.patronID = patronID;
+	public void setPatron(Patron patron) {
+		this.patron = patron;
 	}
 	
 	// get description
@@ -47,10 +47,10 @@ public class Hold {
 	}
 	
 	// constructor initializes hold given holdID, patronID, and description
-	public Hold(String holdID, String patronID, String descr, Date placedOn)
+	public Hold(String holdID, Patron patron, String descr, Date placedOn)
 	{
 		this.holdID = holdID;
-		this.patronID = patronID;
+		this.patron = patron;
 		this.descr = descr;
 		this.placedOn = placedOn;
 	}

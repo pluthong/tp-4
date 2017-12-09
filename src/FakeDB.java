@@ -7,7 +7,6 @@ public class FakeDB
 	private static Map<String, Copy> copyStore; // List of copy inside Library
 	private static Map<String, Hold> holdStore; // List of hold inside Library
 	private static Map<String, Event> eventStore; // List of event inside Library
-    private static int index = 0;
     
 	static // the following runs once when class is loaded: "static initializer"
 	{
@@ -15,21 +14,6 @@ public class FakeDB
 		copyStore = new HashMap<String, Copy>();
 		holdStore = new HashMap<String, Hold>();		
 		eventStore = new HashMap<String, Event>();
-
-		// create patrons...
-		Patron p1 = new Patron("P1", "Eric");
-		
-		// insert holds...
-		holdStore.put("H1", new Hold("H1","P1", "you have tuition fee to pay.", AppUtil.convertStringToDate("11/09/2017", "MM/dd/yyyy")));
-
-		p1.addHold(getHold("H1"));
-		patronStore.put("P1", p1);
-		patronStore.put("P2",new Patron("P2", "Paul") );
-
-		// insert copies...
-		copyStore.put("C1", new Copy("C1", "Applying UML and patterns"));
-		copyStore.put("C2", new Copy("C2", "The Mythical MAN-MONTH"));
-
 	}
 
 	public static Patron getPatron(String patronID) // return Patron by passing patronID
@@ -47,9 +31,24 @@ public class FakeDB
 		return holdStore.get(holdID);
 	}
 
-	public static void logEvent(Event event) 
+	public static void insertEvent(Event event) 
 	{
 		eventStore.put(event.getEventID(), event);
+	}
+	
+	public static void insertPatron(Patron patron) 
+	{
+		patronStore.put(patron.getPatronID(), patron);
+	}
+	
+	public static void insertCopy(Copy copy) 
+	{
+		copyStore.put(copy.getCopyID(), copy);
+	}
+	
+	public static void insertHold(Hold hold) 
+	{
+		holdStore.put(hold.getHoldID(), hold);
 	}
 
 	public static Map<String, Event> getStoreEvent() 

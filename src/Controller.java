@@ -20,7 +20,33 @@ public class Controller {
 		return c;
 	}
 
-	static {}
+	static {
+		
+		// insert holds...
+		Patron p3 = new Patron("P3", "YU");
+		// init create hold for patron ID "P3"
+		Hold hold = new Hold("H1",p3, "you have tuition fee to pay.", AppUtil.convertStringToDate("11/09/2017", "MM/dd/yyyy"));
+		FakeDB.insertHold(hold);
+		p3.addHold(hold);
+		
+		// init create patrons... [3 max]
+		FakeDB.insertPatron(new Patron("P1", "ERIC"));
+		FakeDB.insertPatron(new Patron("P2", "PAUL"));
+		FakeDB.insertPatron(p3);
+	
+		// init insert copies... [10 max]
+		FakeDB.insertCopy(new Copy("C1", "Applying UML and patterns"));
+		FakeDB.insertCopy(new Copy("C2", "The Mythical MAN-MONTH"));
+		FakeDB.insertCopy(new Copy("C3", "We Were the Lucky Ones"));
+		FakeDB.insertCopy(new Copy("C4", "Catching Fireflies"));
+		FakeDB.insertCopy(new Copy("C5", "The Cabin"));
+		FakeDB.insertCopy(new Copy("C6", "In the Arena"));
+		FakeDB.insertCopy(new Copy("C7", "The Wonderful Things You Will Be"));
+		FakeDB.insertCopy(new Copy("C8", "The Woman Who Thought Too Much"));
+		FakeDB.insertCopy(new Copy("C8", "The Beginning of Everything"));
+		FakeDB.insertCopy(new Copy("C10", "The Purple Balloon"));
+
+	}
 
 	public static String verifyPatron(String patronID) {	
 		// get patron from fake DB
@@ -42,7 +68,7 @@ public class Controller {
 
 	private static void logger(String entity, String descr) {
 		event =  new Event( "E" + ++idxEventDB, entity, descr);
-		FakeDB.logEvent(event);
+		FakeDB.insertEvent(event);
 	}
 
 	public static String startCheckIn(String copyID) {
@@ -53,16 +79,15 @@ public class Controller {
 			logger(entityCopy,"Copy ID [" + copyID + "] not found");
 			return "> Copy ID [" + copyID + "] not found";
 		}
-		
+
 		if(p == null) 
 			return "> Check-in process not valid for Copy ID [" + copyID + "]";
-		
 		boolean checkedInCopy = p.checkCopyIn(c);
 		String msg = checkedInCopy ? "> Checked Copy ID [" + copyID + "]" : "> Check in Copy ID [" + copyID + "] failed"; 
 		logger(entityCopy,msg);
 		return msg + System.lineSeparator() + p.toString();
 	}
-	
+
 	public static String checkOutCopy(String copyID) {
 		String msg = "";
 		// get copy from fake DB
@@ -72,7 +97,7 @@ public class Controller {
 		c.setOutTo(p);
 		logger(entityCopy,"set copy ID: " + copyID + " out to patron ID: " + p.getPatronID());
 		boolean checkedOutCopy = p.checkCopyOut(c);
-		
+
 		if(checkedOutCopy) {
 			logger(entityPatron, "added copy ID: " + copyID + " to patron ID: " + p.getPatronID());
 			msg = p.toString();

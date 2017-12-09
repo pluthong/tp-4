@@ -48,7 +48,7 @@ public class Patron
 		this.name = name;
 		this.patronID = id;
 		this.copiesOut = new ArrayList<>();
-		this.holds = new ArrayList<>();
+		this.holds = new ArrayList<Hold>();
 	}
    
 	// method returns true if checked copy out to patron

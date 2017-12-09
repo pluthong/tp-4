@@ -139,7 +139,7 @@ public class TRLApp {
 					System.out.println("> Invalid selection");
 					break;
 				}	
-			}catch(Exception ex) {
+		}catch(Exception ex) {
 				System.out.println("> Invalid selection");
 				choiceInput.next();
 			}
