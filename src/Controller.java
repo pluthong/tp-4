@@ -63,6 +63,28 @@ public class Controller {
 		return msg;
 	}
 	
+	public static String searchCopy(String copyID) {
+		String info = "";
+		// get copy from fake DB
+		currentCopy = FakeDB.getCopy(copyID);
+		if(currentCopy == null)
+			info = "> Copy ID [" + copyID + "] not found";
+		else
+			info = currentCopy.toString();
+		return info;
+	}
+
+	public static String searchPatron(String patronID) {
+		String info = "";
+		// get patron from fake DB
+		currentPatron = FakeDB.getPatron(patronID);
+		if(currentPatron == null)
+			info = "> Patron ID [" + patronID + "] not found";
+		else
+			info = currentPatron.toString();
+		return info;
+	}
+	
 	public static String startCheckOut(String copyID) {
 		// get copy from fake DB
 		currentCopy = FakeDB.getCopy(copyID);

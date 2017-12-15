@@ -18,14 +18,15 @@ public class TRLApp {
 
 		do {
 			// Display menu graphics
-			System.out.println("=================================");
-			System.out.println("|   TRL Main Menu               |");
-			System.out.println("=================================");
-			System.out.println("| Options:                      |");
-			System.out.println("|        [1] Check out          |");
-			System.out.println("|        [2] Check in           |");
-			System.out.println("|        [3] Exit               |");
-			System.out.println("=================================");
+			System.out.println("=========================================");
+			System.out.println("|   TRL Main Menu                       |");
+			System.out.println("=========================================");
+			System.out.println("| Options:                              |");
+			System.out.println("|        [1] Check out                  |");
+			System.out.println("|        [2] Check in                   |");
+			System.out.println("|        [3] Search copy, patron        |");
+			System.out.println("|        [4] Exit                       |");
+			System.out.println("=========================================");
 			System.out.print("> Enter your option here: ");
 
 			try {
@@ -40,6 +41,9 @@ public class TRLApp {
 					displayCheckInMenu();
 					break;
 				case 3:
+					displaySearchMenu();
+					break;
+				case 4:
 					System.out.println("> Exit selected");
 					break;
 				default:
@@ -50,22 +54,89 @@ public class TRLApp {
 				System.out.println("> Invalid selection");
 				choiceInput.next(); // clear invalid input from scanner
 			}
-		} while (choice != 3); // Exit if choice is 3
+		} while (choice != 4); // Exit if choice is 4
 
 		System.out.println("> You have exited the Texbook Rental Library! ");
+	}
+	
+	public static void displaySearchMenu() {
+
+		do {
+			// Display Search Menu
+			System.out.println("=========================================");
+			System.out.println("|   Search Menu                         |");
+			System.out.println("=========================================");
+			System.out.println("| Options:                              |");
+			System.out.println("|        [1] Search Patron              |");
+			System.out.println("|        [2] Search Copy                |");
+			System.out.println("|        [3] Back to main menu          |");
+			System.out.println("=========================================");
+			System.out.print("> Enter your option here: ");
+			
+			try {
+				choice = choiceInput.nextInt();// User inputs a choice (integer).
+				switch (choice) {
+				case 1:
+					searchPatron();
+					break;
+				case 2:
+					searchCopy();
+					break;
+				case 3:
+					break;
+				default:
+					System.out.println("> Invalid selection");
+					break;
+				}
+			} catch (Exception ex) {
+				System.out.println("> Invalid selection");
+				choiceInput.next();
+			}
+
+		} while (choice != 3); // exit for choice = 2
+	}
+	
+	public static void searchCopy() {
+		do {
+			System.out.print("> Searh copy ID [q -> to Quit] : ");
+			try {
+				copyID = choiceInput.next(); // Worker inputs a copyID (string)
+				if (!copyID.equals("q")) // while worker no entering q
+					System.out.println(Controller.searchCopy(copyID));
+				else
+					choice = 2;
+			} catch (Exception ex) {
+				System.out.println("> Invalid selection");
+			}
+		} while (!copyID.equals("q"));
+	}
+	
+	public static void searchPatron() {
+		do {
+			System.out.print("> Searh patron ID [q -> to Quit] : ");
+			try {
+				patronID = choiceInput.next(); // Worker inputs a patronID (string)
+				if (!patronID.equals("q")) // while worker no entering q
+					System.out.println(Controller.searchPatron(patronID));
+				else
+					choice = 2;
+			} catch (Exception ex) {
+				System.out.println("> Invalid selection");
+			}
+		} while (!patronID.equals("q"));
 	}
 
 	public static void displayCheckOutMenu() {
 
 		do {
 			// Display menu graphics
-			System.out.println("=================================");
-			System.out.println("|   Checkout Menu               |");
-			System.out.println("=================================");
-			System.out.println("| Options:                      |");
-			System.out.println("|        [1] Enter patron ID    |");
-			System.out.println("|        [2] Back to main menu  |");
-			System.out.println("=================================");
+			System.out.println("=========================================");
+			System.out.println("|   Checkout Menu                       |");
+			System.out.println("=========================================");
+			System.out.println("| Options:                              |");
+			System.out.println("|        [1] Enter patron ID            |");
+			System.out.println("|        [2] Back to main menu          |");
+			System.out.println("=========================================");
 			System.out.print("> Enter your option here: ");
 
 			try {
@@ -115,13 +186,13 @@ public class TRLApp {
 
 		do {
 			// Display menu graphics
-			System.out.println("=================================");
-			System.out.println("|   Checkin Menu                |");
-			System.out.println("=================================");
-			System.out.println("| Options:                      |");
-			System.out.println("|        [1] Enter copy ID      |");
-			System.out.println("|        [2] Back to main menu  |");
-			System.out.println("=================================");
+			System.out.println("=========================================");
+			System.out.println("|   Checkin Menu                        |");
+			System.out.println("=========================================");
+			System.out.println("| Options:                              |");
+			System.out.println("|        [1] Enter copy ID              |");
+			System.out.println("|        [2] Back to main menu          |");
+			System.out.println("=========================================");
 			System.out.print("> Enter your option here: ");
 			
 			try {
