@@ -11,39 +11,14 @@ public class Hold {
 		return holdID;
 	}
 	
-	// set hold id
-	public void setHoldID(String id) {
-		this.holdID = id;
-	}
-	
-	// get patron
-	public Patron getPatron() {
-		return this.patron;
-	}
-	
-	// set patron
-	public void setPatron(Patron patron) {
-		this.patron = patron;
-	}
-	
 	// get description
 	public String getDescr() {
 		return this.descr;
 	}
 	
-	// set description
-	public void setDescr(String descr) {
-		this.descr = descr;
-	}
-	
 	// get date
 	public Date getPlacedOn() {
 		return this.placedOn;
-	}
-	
-	// set date
-	public void setPlacedOn(Date placedOn) {
-		this.placedOn = placedOn;
 	}
 	
 	// constructor initializes hold given holdID, patronID, and description

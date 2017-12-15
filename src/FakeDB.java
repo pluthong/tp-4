@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class FakeDB
 {
@@ -41,6 +42,16 @@ public class FakeDB
 		patronStore.put(patron.getPatronID(), patron);
 	}
 	
+	public static void updatePatron(Patron patron) 
+	{
+		patronStore.put(patron.getPatronID(), patron);
+	}
+	
+	public static void updateCopy(Copy copy) 
+	{
+		copyStore.put(copy.getCopyID(), copy);
+	}
+	
 	public static void insertCopy(Copy copy) 
 	{
 		copyStore.put(copy.getCopyID(), copy);
@@ -55,5 +66,5 @@ public class FakeDB
 	{
 		return eventStore;
 	}
-
+	
 }

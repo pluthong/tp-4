@@ -10,9 +10,9 @@ public class Event {
 	}
 
 	// set eventID
-	public void setEventID(String eventID) {
-		this.eventID = eventID;
-	}
+	//public void setEventID(String eventID) {
+		//this.eventID = eventID;
+	//}
 
 	// get entity
 	public String getEntity() {
@@ -20,9 +20,9 @@ public class Event {
 	}
 
 	// set entity
-	public void setEntity(String entity) {
-		this.entity = entity;
-	}
+	//public void setEntity(String entity) {
+	//this.entity = entity;
+	//}
 
 	// get descr
 	public String getDescr() {
@@ -30,9 +30,9 @@ public class Event {
 	}
 
 	// set descr
-	public void setDescr(String descr) {
-		this.descr = descr;
-	}
+	//public void setDescr(String descr) {
+		//this.descr = descr;
+	//}
 	
 	// constructor initializes event given eventID, entity, and description
 	public Event(String eventID, String entity, String descr) {

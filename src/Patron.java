@@ -13,19 +13,9 @@ public class Patron
 		return name;
 	}
 
-	// set Name
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	// get Patron
 	public String getPatronID() {
 		return patronID;
-	}
-
-	// set Patron
-	public void setPatronID(String patronID) {
-		this.patronID = patronID;
 	}
 
 	// get CopiesOut
@@ -38,10 +28,7 @@ public class Patron
 		return this.holds;
 	}
 	
-	public Patron()
-	{
-	}
-	
+
 	// constructor initializes patron given patronID and name
 	public Patron(String id, String name)
 	{
@@ -64,12 +51,13 @@ public class Patron
 	}
 	
 	// method returns true if added hold
-	public void addHold(Hold h)
+	public boolean addHold(Hold h)
 	{
 		// add hold to patron's holds
 		this.holds.add(h);
+		return true;
 	}
-	
+
 	// method returns true if checked copy in from patron
 	// otherwise false 
 	public boolean checkCopyIn(Copy c)

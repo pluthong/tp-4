@@ -23,25 +23,22 @@ public class AppUtil {
     public static Date convertStringToDate(String strDate, String formatDate) {
 
     	Date parsedDate = null;
-		try {
-			 parsedDate=new SimpleDateFormat(formatDate).parse(strDate);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-		e.printStackTrace();
-		}
+    	try {
+    		parsedDate=new SimpleDateFormat(formatDate).parse(strDate);
+    	} catch (ParseException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}
     	return parsedDate;
     }
-    
-    // Create event 
-    public static Event createEvent(int index, String entity, String descr) {
-    	String eventID = "E" + index;
-    	Event event = new Event(eventID, entity, descr);
-    	return event;
-    }
-    
+
 	// Return the passed string without the removed last character
 	public static String trimEndChar(String str) {
-		return (str.length() == 0 || str == null ? "" : str.substring(0, str.length() - 1));
+		
+		if(str.length() == 0)
+			return "";
+		else
+			return str.substring(0, str.length() - 1);
 	}
 
 }

@@ -4,7 +4,6 @@ public class Copy
 	private String copyID; // Identification of copy
 	private String title; // copy title
 	private Patron outTo; // Copy out to Patron
-	private String dueDate;
 
 	// get OutTo
 	public Patron getOutTo() {
@@ -16,24 +15,9 @@ public class Copy
 		this.outTo = outTo;
 	}
 	
-	// get due date
-	public String getDueDate() {
-		return dueDate;
-	}
-	
-	// set due date
-	public void setDueDate(String date) {
-		this.dueDate = date;
-	}
-	
 	// get title
 	public String getTitle() {
 		return title;
-	}
-
-	// set Title
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	// get CopyID
@@ -41,16 +25,12 @@ public class Copy
 		return copyID;
 	}
 	
-	// set CopyID
-	public void setCopyID(String copyID) {
-		this.copyID = copyID;
-	}
-	
 	// constructor initializes Copy given copyID and title
 	public Copy(String copyID, String title)
 	{
 		this.copyID = copyID;
 		this.title = title;
+		this.outTo = null;
 	}
 
 	// generate getters and setters using Eclipse Source menu
@@ -58,14 +38,12 @@ public class Copy
 	public String toString()
 	{
 		String info = "";
-		//info += System.lineSeparator(); // new line
 		info += "Copy ID : " + this.copyID;
 		info += System.lineSeparator(); 
 		info += "Copy title : " + this.title;
 		if(isCopyOutToPatron()) {
 			info += System.lineSeparator();
 			info += "Copy Patron ID/Name : " + outTo.getPatronID() + "/" + outTo.getName();
-			//info += outTo.toString();
 		}
 			
 		// correctly implement this
@@ -88,9 +66,4 @@ public class Copy
 		return c.copyID.equals(this.copyID);
 	}
 
-	// put test code in your main(), but realize it's not unit testing!
-	public static void main(String[] args)
-	{
-	
-	}
 }

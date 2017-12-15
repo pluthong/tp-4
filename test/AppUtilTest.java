@@ -9,18 +9,21 @@ public class AppUtilTest {
     String strDate;
     
 	@Before
-	public void create_sample_date() {
-		// create new copy c1
+	public void init() {
 		strDate = "11/11/2017";
-		System.out.println("string date initialized");
 	}
-	
 	
 	@Test
 	public void test_convert_to_date() {
 		Date date = AppUtil.convertStringToDate(strDate, "MM/dd/yyyy");
 		assertNotNull("date is converted",date);
-		//assertNotNull("date is null",date);
+	}
+	
+	@Test  
+	public void test_throwsExceptionWhenDateWrong() {
+		strDate = "11/11/2013";
+		Date date = AppUtil.convertStringToDate(strDate, "MMd/yyyy");
+		assertNull("date is null",date);
 	}
 	
 	@Test
@@ -28,7 +31,20 @@ public class AppUtilTest {
 		Date date = AppUtil.convertStringToDate(strDate, "MM/dd/yyyy");
 		Date newDate = AppUtil.addDays(date, 5);
 		String newStrDate = AppUtil.convertDateToString(newDate, "MM/dd/yyyy");
-		assertEquals("expected date to be 11/16/2017", "11/16/2017", newStrDate);
+		assertEquals("11/16/2017", newStrDate);
+	}
+	
+	@Test  
+	public void test_trimEndChar() {
+		String input = "trim the last character@";
+		String result = AppUtil.trimEndChar(input);
+		assertEquals("trim the last character", result);
+	}
+	
+	@Test  
+	public void test_trimEndCharWithEmptyString() {
+		String result = AppUtil.trimEndChar("");
+		assertEquals("", result);
 	}
 	
 }
