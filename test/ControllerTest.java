@@ -92,5 +92,29 @@ public class ControllerTest {
 		String msg = Controller.getAllEvent();
 		assertThat(msg,CoreMatchers.containsString("Event ID :E6 - entity :patron - descr : get patron P1"));
 	}
+	
+	@Test
+	public void test_ctrl_searchPatron_found() {
+		String msg = Controller.searchPatron("P3");
+		assertThat(msg,CoreMatchers.containsString("> Patron name : YU"));
+	}
+	
+	@Test
+	public void test_ctrl_searchPatron_notFound() {
+		String msg = Controller.searchPatron("P4");
+		assertEquals("> Patron ID [P4] not found", msg);
+	}
+	
+	@Test
+	public void test_ctrl_searchCopy_found() {
+		String msg = Controller.searchCopy("C1");
+		assertThat(msg,CoreMatchers.containsString("Copy ID : C1"));
+	}
+	
+	@Test
+	public void test_ctrl_searchCopy_notFound() {
+		String msg = Controller.searchCopy("P4");
+		assertEquals("> Copy ID [P4] not found", msg);
+	}
 
 }

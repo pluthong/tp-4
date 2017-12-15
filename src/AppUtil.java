@@ -21,7 +21,6 @@ public class AppUtil {
     
     // convert String to specific date format
     public static Date convertStringToDate(String strDate, String formatDate) {
-
     	Date parsedDate = null;
     	try {
     		parsedDate=new SimpleDateFormat(formatDate).parse(strDate);
