@@ -1,3 +1,4 @@
+import java.util.Date;
 import java.util.Map;
 
 public class Controller {
@@ -122,6 +123,7 @@ public class Controller {
 
 		currentPatron.checkCopyIn(currentCopy);
 		currentCopy.setOutTo(null);
+		currentCopy.setDueDate(null);
 		FakeDB.updatePatron(currentPatron);
 		FakeDB.updateCopy(currentCopy);
 		return checkedInCopyMessage(copyID);
@@ -153,21 +155,22 @@ public class Controller {
 		logger(entityCopy,"get copy " + currentCopy.getCopyID());
 		// copy out to patron
 		currentCopy.setOutTo(currentPatron);
+		// add due date to copy
+		currentCopy.setDueDate(AppUtil.addMinutesToDate(2, new Date())); // added 2 min to current time
 		logger(entityCopy,"set copy ID: " + currentCopy.getCopyID() + " out to patron ID: " + currentPatron.getPatronID());
 		currentPatron.checkCopyOut(currentCopy);
 
 		logger(entityPatron, "added copy ID: " + currentCopy.getCopyID() + " to patron ID: " + currentPatron.getPatronID());
-		//msg = "> Checked copy ID [" + currentCopy.getCopyID() + "] out to patron [" + currentCopy.getOutTo().getPatronID() + "]";
 		FakeDB.updatePatron(currentPatron);
 		FakeDB.updateCopy(currentCopy);
 
-		return checkedOutCopyMessage(currentCopy.getCopyID());
+		return checkedOutCopyMessage(currentCopy);
 	}
 	
 	// method returns decorative message when successful check-out
-	private static String checkedOutCopyMessage(String copyID) {
+	private static String checkedOutCopyMessage(Copy currentCopy) {
 		String msg = "";
-		msg = "Checked copy ID -> " + copyID + ", patron ID -> " + currentPatron.getPatronID() + ", ";
+		msg = "Checked copy ID -> " + currentCopy.getCopyID() + ", due date -> " + AppUtil.printDate(currentCopy.getDueDate())+ ", patron ID -> " + currentPatron.getPatronID() + ", ";
 		msg += "Current Checkout(s) -> ";
 		msg += "[";
 		for (Copy copy : currentPatron.getCopiesOut()) 

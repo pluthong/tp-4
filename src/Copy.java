@@ -5,12 +5,23 @@ public class Copy
 	private String copyID; // Identification of copy
 	private String title; // copy title
 	private Patron outTo; // Copy out to Patron
+	private Date dueDate;
 
 	// get OutTo
 	public Patron getOutTo() {
 		return outTo;
 	}
 	
+	// get dueDate
+	public Date getDueDate() {
+		return dueDate;
+	}
+
+	// set dueDate
+	public void setDueDate(Date date) {
+		this.dueDate = date;
+	}
+
 	// set OutTo
 	public void setOutTo(Patron outTo) {
 		this.outTo = outTo;
@@ -32,6 +43,7 @@ public class Copy
 		this.copyID = copyID;
 		this.title = title;
 		this.outTo = null;
+		this.dueDate= null;
 	}
 
 	// generate getters and setters using Eclipse Source menu
@@ -45,6 +57,9 @@ public class Copy
 		if(isCopyOutToPatron()) {
 			info += System.lineSeparator();
 			info += "Copy Patron ID/Name -> " + outTo.getPatronID() + "/" + outTo.getName();
+			if(dueDate != null) {
+				info += ", due date -> " + AppUtil.printDate(dueDate);
+			}
 		}
 			
 		// correctly implement this
