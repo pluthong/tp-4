@@ -42,7 +42,7 @@ public class TRLApp {
 					break;
 				case 3:
 					displaySearchMenu();
-					break;
+				   	break;
 				case 4:
 					System.out.println("> Exit selected");
 					break;
@@ -161,7 +161,7 @@ public class TRLApp {
 	public static void checkPatron() {
 		System.out.print("> Enter patron ID: ");
 		patronID = choiceInput.next();// Worker inputs a patronID (string).
-		System.out.println(Controller.verifyPatron(patronID));
+		System.out.println(Controller.searchPatron(patronID));
 		if (Controller.getCurrentPatron() != null) {
 			checkOutCopy();
 		}

@@ -49,40 +49,37 @@ public class Controller {
 		FakeDB.insertCopy(new Copy("C10", "The Purple Balloon"));
 
 	}
-
-	public static String verifyPatron(String patronID) {	
-		// get patron from fake DB
-		currentPatron = FakeDB.getPatron(patronID);
-		String msg = "";
-		if(currentPatron == null)
-			msg = "> Patron ID [" + patronID + "] not found";
-		else
-			msg = currentPatron.toString();
-		// create log event 
-		logger(entityPatron,"get patron " + patronID);
-		return msg;
-	}
 	
 	public static String searchCopy(String copyID) {
-		String info = "";
 		// get copy from fake DB
 		currentCopy = FakeDB.getCopy(copyID);
-		if(currentCopy == null)
-			info = "> Copy ID [" + copyID + "] not found";
-		else
-			info = currentCopy.toString();
-		return info;
+		return (currentCopy == null) ? notFoundCopy(copyID) : foundCopy();
+	}
+
+	private static String foundCopy() {
+		logger(entityCopy,"get copy " + currentCopy.getCopyID());
+		return currentCopy.toString();
+	}
+
+	private static String notFoundCopy(String copyID) {
+		logger(entityCopy,"Copy ID [" + copyID + "] not found");
+		return "> Copy ID [" + copyID + "] not found";
 	}
 
 	public static String searchPatron(String patronID) {
-		String info = "";
 		// get patron from fake DB
 		currentPatron = FakeDB.getPatron(patronID);
-		if(currentPatron == null)
-			info = "> Patron ID [" + patronID + "] not found";
-		else
-			info = currentPatron.toString();
-		return info;
+		return (currentPatron == null) ? notFoundPatron(patronID) : foundPatron();
+	}
+
+	private static String foundPatron() {
+		logger(entityPatron,"get patron " + currentPatron.getPatronID());
+		return currentPatron.toString();
+	}
+
+	private static String notFoundPatron(String patronID) {
+		logger(entityPatron,"Patron ID [" + patronID + "] not found");
+		return "> Patron ID [" + patronID + "] not found";
 	}
 	
 	public static String startCheckOut(String copyID) {
@@ -90,7 +87,7 @@ public class Controller {
 		currentCopy = FakeDB.getCopy(copyID);
 		String msg = "";
 		if(currentCopy == null)
-			msg = "> Copy ID [" + copyID + "] not found";
+			msg = notFoundCopy(copyID);
 		else if(currentCopy.getOutTo() != null)
 			msg = "> Failed copy ID [" + copyID + "] already checked out to patron [" + currentCopy.getOutTo().getPatronID() + "]";
 		else
@@ -107,27 +104,22 @@ public class Controller {
 
 	public static String startCheckIn(String copyID) {
 		
-		// get copy from fake DB
+		// get copy from fake DB -> duplication
 		currentCopy = FakeDB.getCopy(copyID);
-		if(currentCopy == null) {
-			logger(entityCopy,"Copy ID [" + copyID + "] not found");
-			return "> Copy ID [" + copyID + "] not found";
-		}
-	
+		
+		if(currentCopy == null) 
+			return notFoundCopy(copyID);
+		
 		currentPatron = currentCopy.getOutTo();
 
 		if(currentPatron == null) 
-			return "> Check-in process not valid for Copy ID [" + copyID + "]";
+			return "> Check-in process failed for Copy ID [" + copyID + "]";
 
 		boolean checkedInCopy = currentPatron.checkCopyIn(currentCopy);
-		String msg = "";
-
 		currentCopy.setOutTo(null);
 		FakeDB.updatePatron(currentPatron);
 		FakeDB.updateCopy(currentCopy);
-		msg = "> Checked Copy ID [" + copyID + "] in to patron ID [" + currentPatron.getPatronID() + "] ";
-
-		return msg; 
+		return "> Checked Copy ID [" + copyID + "] in to patron ID [" + currentPatron.getPatronID() + "] "; 
 	}
 
 	public static String checkOutCopy(Copy currentCopy) {

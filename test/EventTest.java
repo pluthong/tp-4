@@ -10,7 +10,6 @@ public class EventTest {
 	public void init() {
 		// create new event 
 		event = new Event("E1","Patron","patron event_p1");
-		System.out.println("event created");
 	}
 	
 	// test method getEventID
