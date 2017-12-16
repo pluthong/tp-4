@@ -26,14 +26,12 @@ public class PatronTest {
 	
 	@Test
 	public void test_get_patronName() {
-	
 		String name = patron.getName(); 
 		assertEquals("Paul", name);
 	}
 	
 	@Test
 	public void test_get_patronID() {
-	
 		String patronID = patron.getPatronID(); 
 		assertEquals("P1", patronID);
 	}
@@ -84,19 +82,19 @@ public class PatronTest {
 	
 	@Test
 	public void test_displayPatron_withoutCopiesOut() {
-		assertThat(patron.toString(),CoreMatchers.containsString("Patron name : " + patron.getName()));
+		assertThat(patron.toString(),CoreMatchers.containsString("Name -> " + patron.getName()));
 	}
 	
 	@Test
 	public void test_displayPatron_withCopiesOut() {
 		patron.checkCopyOut(copy1);
-		assertThat(patron.toString(),CoreMatchers.containsString("#copy : " + patron.getCopiesOut().size()));
+		assertThat(patron.toString(),CoreMatchers.containsString("#copy -> 1, Current Checkouts -> [C1]"));
 	}
 	
 	@Test
 	public void test_displayPatron_withHold() {
 		patron.addHold(hold);
-		assertThat(patron.toString(),CoreMatchers.containsString("#hold : " + patron.getHolds().size()));
+		assertThat(patron.toString(),CoreMatchers.containsString("#hold -> " + patron.getHolds().size()));
 	}
 	
 }

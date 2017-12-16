@@ -86,40 +86,35 @@ public class Patron
 	// returns a string representation of the object Patron
 	public String toString()
 	{
-		String info = "================================";
+		String info = "=========================================";
 		info += System.lineSeparator();
-		info += "|   patron info                |";
+		info +=       "|   patron info                         |";
 		info += System.lineSeparator();
-		info += "================================";
+		info += "=========================================";
 		info += System.lineSeparator();
-		info += "> Patron ID : " + this.patronID;
-		info += System.lineSeparator();
-		info += "> Patron name : " + this.name;
+		info += "Patron : ID -> " + this.patronID + ", Name -> " + this.name;
 		if(!copiesOut.isEmpty()) {
 			info += System.lineSeparator();
-			info += "> #copy : " + copiesOut.size();
-			info += System.lineSeparator();
-			info += "> Copies out: [";
+			info += "#copy -> " + copiesOut.size();
+			info += ", Current Checkouts -> [";
 			for (Copy copy : copiesOut) 
 				info += copy.getCopyID() + ", ";
-			
 			info = AppUtil.trimEndChar(info.trim());
 			info += "]";
 		}
 		
 		if(!holds.isEmpty()) {
 			info += System.lineSeparator();
-			info += ">> #hold : " + holds.size();
+			info += "#hold -> " + holds.size();
 			info += System.lineSeparator();
-			
 			for (Hold hold : holds) {
-				info += ">>> Hold ID: ";
+				info += "hold ID -> ";
 				info += hold.getHoldID();
 				info += System.lineSeparator();
-				info += ">>> description: ";
+				info += "description -> ";
 				info += hold.getDescr();
 				info += System.lineSeparator();
-				info += ">>> placed on: ";
+				info += "placed on -> ";
 				info += AppUtil.convertDateToString(hold.getPlacedOn(), "MM/dd/yyyy");
 				info += System.lineSeparator();
 			}

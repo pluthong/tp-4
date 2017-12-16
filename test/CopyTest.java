@@ -31,14 +31,14 @@ public class CopyTest {
 	
 	@Test
 	public void test_displayCopy_withoutOutToPatron() {
-		assertThat(copy.toString(),CoreMatchers.containsString("Copy title : " + copy.getTitle()));
+		assertThat(copy.toString(),CoreMatchers.containsString("Copy title -> " + copy.getTitle()));
 	}
 	
 	@Test
 	public void test_displayCopy_withOutToPatron() {
 		Patron patron = new Patron("P1", "Paul");
 		copy.setOutTo(patron);
-		assertThat(copy.toString(),CoreMatchers.containsString("Copy Patron ID/Name : " + copy.getOutTo().getPatronID()));
+		assertThat(copy.toString(),CoreMatchers.containsString("Copy Patron ID/Name -> " + copy.getOutTo().getPatronID()));
 	}
 	
 	@Test

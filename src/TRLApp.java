@@ -17,7 +17,7 @@ public class TRLApp {
 	public static void startTRL() {
 
 		do {
-			// Display menu graphics
+			// Display -> Main Menu
 			System.out.println("=========================================");
 			System.out.println("|   TRL Main Menu                       |");
 			System.out.println("=========================================");
@@ -27,7 +27,7 @@ public class TRLApp {
 			System.out.println("|        [3] Search copy, patron        |");
 			System.out.println("|        [4] Exit                       |");
 			System.out.println("=========================================");
-			System.out.print("> Enter your option here: ");
+			System.out.print("> Enter your option here [1,2,3, or 4]: ");
 
 			try {
 
@@ -71,7 +71,7 @@ public class TRLApp {
 			System.out.println("|        [2] Search Copy                |");
 			System.out.println("|        [3] Back to main menu          |");
 			System.out.println("=========================================");
-			System.out.print("> Enter your option here: ");
+			System.out.print("> Enter your option here [1,2, or 3]: ");
 			
 			try {
 				choice = choiceInput.nextInt();// User inputs a choice (integer).
@@ -98,7 +98,7 @@ public class TRLApp {
 	
 	public static void searchCopy() {
 		do {
-			System.out.print("> Searh copy ID [q -> to Quit] : ");
+			System.out.print("> Searh copy ID [C1,C2,...,C9, or C10 -> copy ID or q -> to Quit]: ");
 			try {
 				copyID = choiceInput.next(); // Worker inputs a copyID (string)
 				if (!copyID.equals("q")) // while worker no entering q
@@ -113,7 +113,7 @@ public class TRLApp {
 	
 	public static void searchPatron() {
 		do {
-			System.out.print("> Searh patron ID [q -> to Quit] : ");
+			System.out.print("> Searh patron ID [P1,P2, or P3 -> patron ID or q -> to Quit]: ");
 			try {
 				patronID = choiceInput.next(); // Worker inputs a patronID (string)
 				if (!patronID.equals("q")) // while worker no entering q
@@ -137,7 +137,7 @@ public class TRLApp {
 			System.out.println("|        [1] Enter patron ID            |");
 			System.out.println("|        [2] Back to main menu          |");
 			System.out.println("=========================================");
-			System.out.print("> Enter your option here: ");
+			System.out.print("> Enter your option here [1 or 2]: ");
 
 			try {
 				choice = choiceInput.nextInt();// User inputs a choice (integer).
@@ -159,23 +159,22 @@ public class TRLApp {
 	}
 
 	public static void checkPatron() {
-		System.out.print("> Enter patron ID: ");
+		System.out.print("> Enter patron ID [P1,P2, or P3]: ");
 		patronID = choiceInput.next();// Worker inputs a patronID (string).
 		System.out.println(Controller.searchPatron(patronID));
 		if (Controller.getCurrentPatron() != null) {
 			checkOutCopy();
 		}
-	}
+ }
 
 	public static void checkOutCopy() {
 		do {
-			System.out.print("> Check out copy ID [q -> to Quit] : ");
+			System.out.print("> Check out copy ID [C1,C2,...,C9, or C10 -> copy ID or q -> to Quit]: ");
 			try {
 				copyID = choiceInput.next(); // Worker inputs a bookID (string)
 				if (!copyID.equals("q")) // while worker no entering q
 					System.out.println(Controller.startCheckOut(copyID));
-				else
-					choice = 2;
+
 			} catch (Exception ex) {
 				System.out.println("> Invalid selection");
 			}
@@ -193,7 +192,7 @@ public class TRLApp {
 			System.out.println("|        [1] Enter copy ID              |");
 			System.out.println("|        [2] Back to main menu          |");
 			System.out.println("=========================================");
-			System.out.print("> Enter your option here: ");
+			System.out.print("> Enter your option here [1 or 2]: ");
 			
 			try {
 				choice = choiceInput.nextInt();// User inputs a choice (integer).
@@ -217,7 +216,7 @@ public class TRLApp {
 
 	public static void checkInCopy() {
 		do {
-			System.out.print("> Check in copy ID [q -> to Quit] : ");
+			System.out.print("> Check in copy ID [C1,C2,...,C9, or C10 -> copy ID or q -> to Quit]: ");
 			try {
 				copyID = choiceInput.next(); // Worker inputs a copyID (string)
 				if (!copyID.equals("q")) // while worker no entering q

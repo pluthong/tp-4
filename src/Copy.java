@@ -39,12 +39,12 @@ public class Copy
 	public String toString()
 	{
 		String info = "";
-		info += "Copy ID : " + this.copyID;
+		info += "Copy ID -> " + this.copyID;
 		info += System.lineSeparator(); 
-		info += "Copy title : " + this.title;
+		info += "Copy title -> " + this.title;
 		if(isCopyOutToPatron()) {
 			info += System.lineSeparator();
-			info += "Copy Patron ID/Name : " + outTo.getPatronID() + "/" + outTo.getName();
+			info += "Copy Patron ID/Name -> " + outTo.getPatronID() + "/" + outTo.getName();
 		}
 			
 		// correctly implement this

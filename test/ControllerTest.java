@@ -13,16 +13,15 @@ public class ControllerTest {
 	
 	@Test
 	public void test_ctrl_searchPatron_yes() {
-		String patronID = "P1";
-		String msg = Controller.searchPatron(patronID);
-		assertThat(msg,CoreMatchers.containsString("Patron ID : P1"));
+		String msg = Controller.searchPatron("P1");
+		assertThat(msg,CoreMatchers.containsString("Patron : ID -> P1, Name -> ERIC"));
 	}
 	
 	@Test
 	public void test_ctrl_startCheckOut_ok() {
 		Controller.searchPatron("P3");
 		String msg = Controller.startCheckOut("C2");
-		assertThat(msg,CoreMatchers.containsString("Checked copy ID [C2]"));
+		assertThat(msg,CoreMatchers.containsString("Checked copy ID -> C2"));
 	}
 	
 	@Test
@@ -31,7 +30,7 @@ public class ControllerTest {
 		Controller.startCheckOut("C5");
 		Controller.searchPatron("P2");
 		String msg = Controller.startCheckOut("C5");
-		assertThat(msg,CoreMatchers.containsString("> Failed copy ID [C5] already checked out to patron [P1]"));
+		assertThat(msg,CoreMatchers.containsString("Failed, copy ID [C5] already checked out to patron"));
 	}
 	
 	@Test
@@ -52,7 +51,15 @@ public class ControllerTest {
 		Controller.searchPatron("P1");
 		Controller.startCheckOut("C1");
 		String msg = Controller.startCheckIn("C1");	
-		assertThat(msg,CoreMatchers.containsString("> Checked Copy ID [C1] in to patron ID [P1]"));
+		assertThat(msg,CoreMatchers.containsString("Checked in copy ID -> C1"));
+	}
+	
+	@Test
+	public void test_ctrl_startCheckIn_CopyFound_empty() {
+		Controller.searchPatron("P1");	
+		Controller.startCheckIn("C3");
+		String msg = Controller.startCheckIn("C5");
+		assertThat(msg,CoreMatchers.containsString("patron ID -> P1, Current Checkouts -> empty"));
 	}
 	
 	@Test
@@ -82,14 +89,13 @@ public class ControllerTest {
 	public void test_ctrl_getAllEvent() {
 		Controller.searchPatron("P1");
 		String msg = Controller.getAllEvent();
-		System.out.println(msg);
-		//assertThat(msg,CoreMatchers.containsString("Event ID :E6 - entity :patron - descr : get patron P1"));
+		assertThat(msg,CoreMatchers.containsString("Event ID :E6 - entity :patron - descr : get patron P1"));
 	}
 	
 	@Test
 	public void test_ctrl_searchPatron_found() {
 		String msg = Controller.searchPatron("P3");
-		assertThat(msg,CoreMatchers.containsString("> Patron name : YU"));
+		assertThat(msg,CoreMatchers.containsString("Patron : ID -> P3, Name -> YU"));
 	}
 	
 	@Test
@@ -101,7 +107,7 @@ public class ControllerTest {
 	@Test
 	public void test_ctrl_searchCopy_found() {
 		String msg = Controller.searchCopy("C1");
-		assertThat(msg,CoreMatchers.containsString("Copy ID : C1"));
+		assertThat(msg,CoreMatchers.containsString("Copy ID -> C1"));
 	}
 	
 	@Test

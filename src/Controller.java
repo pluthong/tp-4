@@ -88,7 +88,7 @@ public class Controller {
 		if(currentCopy == null)
 			msg = notFoundCopy(copyID);
 		else if(currentCopy.getOutTo() != null)
-			msg = "> Failed copy ID [" + copyID + "] already checked out to patron [" + currentCopy.getOutTo().getPatronID() + "]";
+			msg = "Failed, copy ID [" + copyID + "] already checked out to patron [" + currentCopy.getOutTo().getPatronID() + "]";
 		else
 			msg = checkOutCopy(currentCopy);
 		// create log event 
@@ -118,11 +118,31 @@ public class Controller {
 		currentCopy.setOutTo(null);
 		FakeDB.updatePatron(currentPatron);
 		FakeDB.updateCopy(currentCopy);
-		return "> Checked Copy ID [" + copyID + "] in to patron ID [" + currentPatron.getPatronID() + "] "; 
+		//return "> Checked Copy ID [" + copyID + "] in to patron ID [" + currentPatron.getPatronID() + "] ";
+	
+		return checkedInCopyMessage(copyID);
 	}
-
-	public static String checkOutCopy(Copy currentCopy) {
+	
+	private static String checkedInCopyMessage(String copyID) {
 		String msg = "";
+		msg = "Checked in copy ID -> " + copyID + ", patron ID -> " + currentPatron.getPatronID() + ", ";
+		msg += "Current Checkouts -> ";
+		
+		if(!currentPatron.getCopiesOut().isEmpty()) {
+			msg += "[";
+			for (Copy copy : currentPatron.getCopiesOut()) 
+				msg += copy.getCopyID() + ", ";
+			msg = AppUtil.trimEndChar(msg.trim());
+			msg += "]";
+		} else {
+			msg += "empty";
+		}
+		
+		return msg;
+	}
+	
+	public static String checkOutCopy(Copy currentCopy) {
+		//String msg = "";
 		// current copy is already checked out
 		logger(entityCopy,"get copy " + currentCopy.getCopyID());
 		// copy out to patron
@@ -131,10 +151,22 @@ public class Controller {
 		currentPatron.checkCopyOut(currentCopy);
 
 		logger(entityPatron, "added copy ID: " + currentCopy.getCopyID() + " to patron ID: " + currentPatron.getPatronID());
-		msg = "> Checked copy ID [" + currentCopy.getCopyID() + "] out to patron [" + currentCopy.getOutTo().getPatronID() + "]";
+		//msg = "> Checked copy ID [" + currentCopy.getCopyID() + "] out to patron [" + currentCopy.getOutTo().getPatronID() + "]";
 		FakeDB.updatePatron(currentPatron);
 		FakeDB.updateCopy(currentCopy);
 
+		return checkedOutCopyMessage(currentCopy.getCopyID());
+	}
+	
+	private static String checkedOutCopyMessage(String copyID) {
+		String msg = "";
+		msg = "Checked copy ID -> " + copyID + ", patron ID -> " + currentPatron.getPatronID() + ", ";
+		msg += "Current Checkout(s) -> ";
+		msg += "[";
+		for (Copy copy : currentPatron.getCopiesOut()) 
+			msg += copy.getCopyID() + ", ";
+		msg = AppUtil.trimEndChar(msg.trim());
+		msg += "]";
 		return msg;
 	}
 
