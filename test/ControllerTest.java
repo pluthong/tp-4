@@ -60,7 +60,7 @@ public class ControllerTest {
 		Controller.searchPatron("P1");
 		Controller.startCheckOut("C3");
 		String msg = Controller.startCheckIn("C1");	
-		assertEquals("> Check-in process not valid for Copy ID [C1]", msg);
+		assertEquals("> Check-in process failed for Copy ID [C1]", msg);
 	}
 	
 	@Test
@@ -68,7 +68,6 @@ public class ControllerTest {
 		Controller.searchPatron("P1");
 		Controller.startCheckOut("C3");
 		Copy copy = Controller.getCurrentCopy();
-		//System.out.print(copy.getCopyID());
 		assertEquals("C3", copy.getCopyID());
 	}
 	

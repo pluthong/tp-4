@@ -1,5 +1,4 @@
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Controller {
 
@@ -115,7 +114,7 @@ public class Controller {
 		if(currentPatron == null) 
 			return "> Check-in process failed for Copy ID [" + copyID + "]";
 
-		boolean checkedInCopy = currentPatron.checkCopyIn(currentCopy);
+		currentPatron.checkCopyIn(currentCopy);
 		currentCopy.setOutTo(null);
 		FakeDB.updatePatron(currentPatron);
 		FakeDB.updateCopy(currentCopy);
@@ -129,7 +128,7 @@ public class Controller {
 		// copy out to patron
 		currentCopy.setOutTo(currentPatron);
 		logger(entityCopy,"set copy ID: " + currentCopy.getCopyID() + " out to patron ID: " + currentPatron.getPatronID());
-		boolean checkedOutCopy = currentPatron.checkCopyOut(currentCopy);
+		currentPatron.checkCopyOut(currentCopy);
 
 		logger(entityPatron, "added copy ID: " + currentCopy.getCopyID() + " to patron ID: " + currentPatron.getPatronID());
 		msg = "> Checked copy ID [" + currentCopy.getCopyID() + "] out to patron [" + currentCopy.getOutTo().getPatronID() + "]";
