@@ -26,11 +26,6 @@ public class FakeDB
 		return copyStore.get(copyID);
 	}
 
-//	public static Hold getHold(String holdID) // return Hold by passing holdID
-//	{
-//		return holdStore.get(holdID);
-//	}
-
 	public static void insertEvent(Event event) 
 	{
 		eventStore.put(event.getEventID(), event);
