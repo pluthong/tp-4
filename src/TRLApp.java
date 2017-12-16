@@ -25,9 +25,10 @@ public class TRLApp {
 			System.out.println("|        [1] Check out                  |");
 			System.out.println("|        [2] Check in                   |");
 			System.out.println("|        [3] Search copy, patron        |");
-			System.out.println("|        [4] Exit                       |");
+			System.out.println("|        [4] Display Event Log          |");
+			System.out.println("|        [5] Exit                       |");
 			System.out.println("=========================================");
-			System.out.print("> Enter your option here [1,2,3, or 4]: ");
+			System.out.print("> Enter your option here [1,2,3,4, or 5]: ");
 
 			try {
 
@@ -44,6 +45,9 @@ public class TRLApp {
 					displaySearchMenu();
 				   	break;
 				case 4:
+					displayEventLog();
+					break;
+				case 5:
 					System.out.println("> Exit selected");
 					break;
 				default:
@@ -54,7 +58,7 @@ public class TRLApp {
 				System.out.println("> Invalid selection");
 				choiceInput.next(); // clear invalid input from scanner
 			}
-		} while (choice != 4); // Exit if choice is 4
+		} while (choice != 5); // Exit if choice is 5
 
 		System.out.println("> You have exited the Texbook Rental Library! ");
 	}
@@ -94,6 +98,10 @@ public class TRLApp {
 			}
 
 		} while (choice != 3); // exit for choice = 2
+	}
+	
+	public static void displayEventLog() {
+		System.out.println(Controller.getAllEvent());
 	}
 	
 	public static void searchCopy() {
