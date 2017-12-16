@@ -41,6 +41,14 @@ public class ControllerTest {
 	}
 	
 	@Test
+	public void test_ctrl_startCheckOut_dueDate() {
+		Controller.searchPatron("P2");
+		String msg = Controller.startCheckOut("C9");
+		System.out.print(msg);
+		assertThat(msg,CoreMatchers.containsString("Checked copy ID -> C9, due date -> "));
+	}
+	
+	@Test
 	public void test_ctrl_startCheckIn_CopyNotFound() {
 		String msg = Controller.startCheckIn("C12");	
 		assertEquals("> Copy ID [C12] not found", msg);
