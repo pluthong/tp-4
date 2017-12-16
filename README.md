@@ -25,7 +25,7 @@ The following steps will help you to install TRL :
 ### Usage
 The application is configured with 3 patrons ID (P1,P2,P3) and 10 copies (C1,C2,C3,C4,C5,C6,C7,C8,C9,C10).
 Be careful to digit capital letter for both copy and patron ID. Patron ID P3 has been configured to have a hold.
-We can use these IDs to play with the application others will generate invalid selection.
+You can use these IDs to play with the application others will generate invalid selection.
 
 ### License
 Copyright (c) 2017 Paul S Thong Thong, Yu Zhang
